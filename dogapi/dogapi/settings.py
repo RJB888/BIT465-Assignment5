@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # Django rest framework
     'rest_framework',
     # Application
-    'dog.apps.DogsConfig'
+    'dogs.apps.DogsConfig'
 ]
 
 MIDDLEWARE = [

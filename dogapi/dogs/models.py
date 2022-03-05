@@ -26,9 +26,25 @@ class Breed(models.Model):
     )
     name = models.CharField(max_length=100, blank=True, default="")
     size = models.CharField(max_length=1, choices=SIZE_OPTIONS)
-    friendliness, trainability, sheddingamount, exerciseneeds = models.PositiveIntegerField(
+    friendliness = models.PositiveIntegerField(
         validators=[
             MaxValueValidator(1),
             MinValueValidator(5)
-        ]
-    )
+        ])
+    trainability = models.PositiveIntegerField(
+        validators=[
+            MaxValueValidator(1),
+            MinValueValidator(5)
+        ])
+    sheddingamount = models.PositiveIntegerField(
+        validators=[
+            MaxValueValidator(1),
+            MinValueValidator(5)
+        ])
+    exerciseneeds = models.PositiveIntegerField(
+        validators=[
+            MaxValueValidator(1),
+            MinValueValidator(5)
+        ])
+
+    
