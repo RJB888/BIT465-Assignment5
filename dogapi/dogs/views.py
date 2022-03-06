@@ -14,25 +14,25 @@ from .serializers import DogBreedSerializer
 class BreedList(generics.ListCreateAPIView):
     queryset = Breed.objects.all()
     serializer_class = DogBreedSerializer
-    name = 'breedList'
+    name = 'breed-list'
 
 
 class BreedDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Breed.objects.all()
     serializer_class = DogBreedSerializer
-    name = 'breedDetail'
+    name = 'breed-detail'
 
 
 class DogList(generics.ListCreateAPIView):
     queryset = Dog.objects.all()
     serializer_class = DogSerializer
-    name = 'dogList'
+    name = 'dog-list'
 
 
 class DogDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Dog.objects.all()
     serializer_class = DogSerializer
-    name = 'dogDetail'
+    name = 'dog-detail'
 
 
 class ApiRoot(generics.GenericAPIView):
