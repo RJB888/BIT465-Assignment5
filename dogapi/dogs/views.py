@@ -5,32 +5,34 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import status
-from .models import Dog, Breed
-from .serializers import DogSerializer, DogBreedSerializer
+from .models import Dog
+from .models import Breed
+from .serializers import DogSerializer
+from .serializers import DogBreedSerializer
 
 
 class BreedList(generics.ListCreateAPIView):
     queryset = Breed.objects.all()
     serializer_class = DogBreedSerializer
-    name = 'breed_list'
+    name = 'breedList'
 
 
 class BreedDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Breed.objects.all()
     serializer_class = DogBreedSerializer
-    name = 'breed_detail'
+    name = 'breedDetail'
 
 
 class DogList(generics.ListCreateAPIView):
     queryset = Dog.objects.all()
     serializer_class = DogSerializer
-    name = 'dog_list'
+    name = 'dogList'
 
 
 class DogDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Dog.objects.all()
     serializer_class = DogSerializer
-    name = 'dog_detail'
+    name = 'dogDetail'
 
 
 class ApiRoot(generics.GenericAPIView):

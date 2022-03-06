@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .models import Dog, Breed
-# import dogapi.dogs.views
+from .models import Dog
+from .models import Breed
 
 
 class DogSerializer(serializers.HyperlinkedModelSerializer):
@@ -25,19 +25,18 @@ class DogSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class DogBreedSerializer(serializers.HyperlinkedModelSerializer):
-
-    # dog = serializers.HyperlinkedRelatedField(
-    #     many=True,
-    #     read_only=True,
-    #     view_name='dog_detail'
-    # )
-    dog = DogSerializer(many=True, read_only=True)
+    # this links the 'dogs' related_name with the models related_name in the foreign key
+    dogs = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='dogDetail'
+    )
 
     class Meta:
         model = Breed
         fields = (
             'url',
-            'dog',
+            'dogs',
             'name',
             'size',
             'friendliness',
