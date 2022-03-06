@@ -1,38 +1,49 @@
 from rest_framework import serializers
-from .models import Dog
+from .models import Dog, Breed
+# import dogapi.dogs.views
 
 
-class DogSerializer(serializers.ModelSerializer):
+class DogSerializer(serializers.HyperlinkedModelSerializer):
+
+    breed = serializers.SlugRelatedField(queryset=Breed.objects.all(), slug_field='name')
+    gender = serializers.ChoiceField(choices=Dog.GENDER_OPTIONS)
+    gender_description = serializers.CharField(
+        source='get_gender_display',
+        read_only=True)
 
     class Meta:
         model = Dog
-        fields = ('name',
+        fields = ('url',
+                  'name',
                   'age',
                   'breed',
                   'gender',
+                  'gender_description',
                   'color',
                   'favorite_food',
-                  'favorite_toy')
-    # name = serializers.CharField(max_length=50)
-    # age = serializers.IntegerField()
-    # breed = serializers.CharField(max_length=100)
-    # gender = serializers.CharField(max_length=100)
-    # color = serializers.CharField(max_length=100)
-    # favorite_food = serializers.CharField(max_length=100)
-    # favorite_toy = serializers.CharField(max_length=100)
-    #
-    # def create(self, validated_data):
-    #     return Dog.objects.create(**validated_data)
-    #
-    # def update(self, instance, validated_data):
-    #     instance.name = validated_data.get('name', instance.name)
-    #     instance.age = validated_data.get('age', instance.age)
-    #     instance.breed = validated_data.get('breed', instance.breed)
-    #     instance.gender = validated_data.get('gender', instance.gender)
-    #     instance.color = validated_data.get('color', instance.color)
-    #     instance.favorite_food = validated_data.get('favorite_food', instance.favorite_food)
-    #     instance.favorite_toy = validated_data.get('favorite_toy', instance.favorite_toy)
-    #     instance.save()
-    #     return instance
+                  'favorite_toy',)
+
+
+class DogBreedSerializer(serializers.HyperlinkedModelSerializer):
+
+    # dog = serializers.HyperlinkedRelatedField(
+    #     many=True,
+    #     read_only=True,
+    #     view_name='dog_detail'
+    # )
+    dog = DogSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Breed
+        fields = (
+            'url',
+            'dog',
+            'name',
+            'size',
+            'friendliness',
+            'trainability',
+            'sheddingamount',
+            'exerciseneeds',
+        )
 
 
